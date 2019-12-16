@@ -1,0 +1,24 @@
+{
+  "name": "nodecalcapp",
+  "version": "1.0.0",
+  "description": "calculator app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdisuleman12/calculatorapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdisuleman12/calculatorapp/issues"
+  },
+  "homepage": "https://github.com/abdisuleman12/calculatorapp#readme",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "nodejs": "0.0.0"
+  }
+}
