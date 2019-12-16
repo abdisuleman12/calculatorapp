@@ -4,6 +4,7 @@
   "description": "calculator app",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/abdisuleman12/calculatorapp#readme",
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "express": "^4.17.1",
     "nodejs": "0.0.0"
   }
 }
