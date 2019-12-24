@@ -17,6 +17,71 @@
     />
 
     <title>Node App</title>
+
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
+
+    <script>
+      // Initialize Cloud Firestore through Firebase
+      firebase.initializeApp({
+        apiKey: "AIzaSyA7owfjnOuaD0f-S4WP6gOaIJh8a4Pvjus",
+        authDomain: "calcapp-84651.firebaseapp.com",
+        projectId: "calcapp-84651"
+      });
+
+      var db = firebase.firestore();
+      //function that display value
+      function dis(val) {
+        document.getElementById("result").value += val;
+      }
+
+      //function that evaluates the digit and return result
+      function solve() {
+        let x = document.getElementById("result").value;
+        console.log(x, "x");
+        let y = eval(x);
+        console.log(y, "y");
+        document.getElementById("result").value = y;
+        db.collection("calculations")
+          .add({
+            calculation: x,
+            result: y
+          })
+          .then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+          })
+          .catch(function(error) {
+            console.log("error adding document", error);
+          });
+      }
+
+      //function that clear the display
+      function clr() {
+        document.getElementById("result").value = "";
+      }
+    </script>
+    <style>
+      .title {
+        margin-bottom: 10px;
+        text-align: center;
+        width: 210px;
+        color: green;
+        border: solid black 2px;
+      }
+
+      input[type="button"] {
+        background-color: greenyellow;
+        color: black;
+        border: solid black 2px;
+        width: 100%;
+      }
+
+      input[type="text"] {
+        background-color: white;
+        border: solid black 2px;
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
     <div class="jumbotron jumbotron-fluid">
@@ -28,18 +93,72 @@
       </div>
     </div>
     <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          One of three columns
+      <div class="column">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Results</h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                Recent Calculations
+              </h6>
+              <p class="card-text" id="final-result"></p>
+            </div>
+          </div>
         </div>
-        <div class="col-sm">
-          One of three columns
-        </div>
-        <div class="col-sm">
-          One of three columns
+        <br />
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Calculator</h5>
+              <br />
+              <table border="1">
+                <tr>
+                  <td colspan="3"><input type="text" id="result" /></td>
+                  <!-- clr() function will call clr to clear all value -->
+                  <td><input type="button" value="c" onclick="clr()" /></td>
+                </tr>
+                <tr>
+                  <!-- create button and assign value to each button -->
+                  <!-- dis("1") will call function dis to display value -->
+                  <td><input type="button" value="1" onclick="dis('1')" /></td>
+                  <td><input type="button" value="2" onclick="dis('2')" /></td>
+                  <td><input type="button" value="3" onclick="dis('3')" /></td>
+                  <td><input type="button" value="/" onclick="dis('/')" /></td>
+                </tr>
+                <tr>
+                  <td><input type="button" value="4" onclick="dis('4')" /></td>
+                  <td><input type="button" value="5" onclick="dis('5')" /></td>
+                  <td><input type="button" value="6" onclick="dis('6')" /></td>
+                  <td><input type="button" value="-" onclick="dis('-')" /></td>
+                </tr>
+                <tr>
+                  <td><input type="button" value="7" onclick="dis('7')" /></td>
+                  <td><input type="button" value="8" onclick="dis('8')" /></td>
+                  <td><input type="button" value="9" onclick="dis('9')" /></td>
+                  <td><input type="button" value="+" onclick="dis('+')" /></td>
+                </tr>
+                <tr>
+                  <td><input type="button" value="." onclick="dis('.')" /></td>
+                  <td><input type="button" value="0" onclick="dis('0')" /></td>
+                  <!-- solve function call function solve to evaluate value -->
+                  <td><input type="button" value="=" onclick="solve()" /></td>
+                  <td><input type="button" value="*" onclick="dis('*')" /></td>
+                </tr>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.6.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="/__/firebase/7.6.1/firebase-analytics.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

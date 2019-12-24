@@ -4,7 +4,7 @@
   "description": "calculator app",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon -e .html DEBUG= node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,7 +20,12 @@
   "homepage": "https://github.com/abdisuleman12/calculatorapp#readme",
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "chalk": "^3.0.0",
+    "debug": "^4.1.1",
     "express": "^4.17.1",
+    "firebase": "^7.6.1",
+    "firebase-admin": "^8.9.0",
+    "morgan": "^1.9.1",
     "nodejs": "0.0.0"
   }
 }
