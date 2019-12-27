@@ -16,7 +16,7 @@
       crossorigin="anonymous"
     />
 
-    <title>Node App</title>
+    <title>Calc App</title>
 
     <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
@@ -30,6 +30,17 @@
       });
 
       var db = firebase.firestore();
+      //function to show all data
+      function loadData() {
+        db.collection("calculations")
+          .get()
+          .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+              document.getElementById("final-results").innerText +=
+                "\n" + doc.data().calcuation;
+            });
+          });
+      }
       //function that display value
       function dis(val) {
         document.getElementById("result").value += val;
@@ -44,10 +55,10 @@
         document.getElementById("result").value = y;
         db.collection("calculations")
           .add({
-            calculation: x,
-            result: y
+            calcuation: `${x} = ${y}`
           })
           .then(function(docRef) {
+            loadData();
             console.log("Document written with ID: ", docRef.id);
           })
           .catch(function(error) {
@@ -83,7 +94,7 @@
       }
     </style>
   </head>
-  <body>
+  <body onload="loadData()">
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4">Calculator App</h1>
@@ -101,7 +112,7 @@
               <h6 class="card-subtitle mb-2 text-muted">
                 Recent Calculations
               </h6>
-              <p class="card-text" id="final-result"></p>
+              <p class="card-text" id="final-results"></p>
             </div>
           </div>
         </div>
